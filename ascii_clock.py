@@ -1,16 +1,3 @@
-# By submitting this assignment, I agree to the following:
-#   "Aggies do not lie, cheat, or steal, or tolerate those who do."
-#   "I have not given or received any unauthorized aid on this assignment."
-#
-# Names:        zach lawrence
-#               Ernest Barron
-#               Jordan Taylor
-#               Caleb Stafford
-# Section:      516
-# Assignment:   lab 8a
-# Date:         10/17/2022
-#
-
 numlist = [
     ["000", " 1 ", "222", "333", "4 4", "555", "666", "777", "888", "999", " "],
     ["0 0", "11 ", "  2", "  3", "4 4", "5  ", "6  ", "  7", "8 8", "9 9", ":"],
