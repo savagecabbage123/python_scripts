@@ -11,9 +11,7 @@ def fibonacci(x) -> int:
 
 #you also dont need sympy for this to work you could use default library or the math library, I just 
 #wanted to use sympy for a simple demo
-"""you can obviously use a simpler method of solving fibonacci but the upside to doing this is that it runs at a constant
-time complexity O(1) since you dont need any loops to solve for an nth term of fibonacci unless you want to print a sequence
-of fibonacci terms which would be O(n) time complexity"""
+"""you can obviously use a simpler method of solving fibonacci but this is a cool way of doing it
 
 user_input = -1
 while (user_input <= 0):
