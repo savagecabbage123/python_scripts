@@ -1,3 +1,6 @@
+#Created a simple script that made homework for one of my classes 10x faster rather than inputting into a calculator 
+#over and over if I got it wrong. In this case it was about 2d expected values, covariance, rho, and variance of new 
+#random variables given X and Y random variables.
 import math
 
 cont = ""
