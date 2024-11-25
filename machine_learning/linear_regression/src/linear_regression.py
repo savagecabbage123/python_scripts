@@ -42,24 +42,6 @@ def sample_standard_deviation(var_sample_data: list[float], mean: float) -> floa
     stdev = math.sqrt(stdev)
     return stdev
 
-def population_standard_deviation(var_pop_data: list[float], pop_mean: float) -> float:
-    """Calculates the standard deviation of a full population set of data.
-
-    Args:
-        var_pop_data: List containing full population data.
-
-    Returns:
-        The population standard deviation of a dataset.
-    """
-    sample_size = len(var_pop_data)
-    pop_stdev = 0
-    for i in var_pop_data:
-        pop_stdev += var_pop_data[i] - pop_mean
-        pop_stdev = pop_stdev**2
-    pop_stdev = pop_stdev / sample_size
-    pop_stdev = math.sqrt(pop_stdev)
-    return pop_stdev
-
 def pearsons_correlation_coefficient(independent_var_data: list[float], dependent_var_data: list[float]) -> float:
     """Calculates the correlation coefficient between 2 variables
     
@@ -116,8 +98,6 @@ def main():
     print(x_stdev)
     print(y_stdev)
     
-    print(population_standard_deviation(x_data))
-    print(population_standard_deviation(y_data))
     #simple_linear_regression(xdata, ydata)
 
 if __name__ == '__main__':
