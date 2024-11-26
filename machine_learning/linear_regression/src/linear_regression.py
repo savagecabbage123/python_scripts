@@ -42,16 +42,34 @@ def sample_standard_deviation(var_sample_data: list[float], mean: float) -> floa
     stdev = math.sqrt(stdev)
     return stdev
 
-def pearsons_correlation_coefficient(independent_var_data: list[float], dependent_var_data: list[float]) -> float:
-    """Calculates the correlation coefficient between 2 variables
+def pearsons_correlation_coefficient(independent_var_data: list[float], 
+                                     dependent_var_data: list[float], 
+                                     independent_mean, dependent_mean
+                                     ) -> float:
+    """Calculates the correlation coefficient between 2 variables.
     
     Args:
         independent_var_data: List containing independent variable data.
         dependent_var_data: List containing dependent variable data.
+        independent_mean: Independent variable mean value.
+        dependent_mean: Dependent variable mean value.
 
     returns:
-        Correlation coefficient between 2 variables
+        Correlation coefficient between 2 variables.
     """
+    
+    top_sum = 0
+    bottom_left_sum = 0
+    bottom_right_sum = 0
+    for i in range(len(independent_var_data)):
+        sum_x = independent_var_data[i] - independent_mean
+        sum_y = dependent_var_data[i] - dependent_mean
+        top_sum += sum_x * sum_y
+        bottom_left_sum += sum_x**2
+        bottom_right_sum += sum_y**2
+    bottom_sum = math.sqrt(bottom_left_sum * bottom_right_sum)
+    correlation = top_sum / bottom_sum
+    return correlation
 
 def simple_linear_regression(independent_var_data: list[float], dependent_var_data: list[float]) -> float:
     """Calculates regression coefficient and constant for linear regression.
