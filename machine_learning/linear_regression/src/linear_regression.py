@@ -35,10 +35,10 @@ def sample_standard_deviation(var_sample_data: list[float], mean: float) -> floa
     """
     sample_size = len(var_sample_data) - 1
     stdev = 0
-    for i in var_sample_data:
-        stdev += var_sample_data[i] - mean
-        stdev = stdev**2
-    stdev = stdev / sample_size
+    for var_data in var_sample_data:
+        sum = var_data - mean
+        stdev += sum**2 / sample_size
+    #stdev = stdev / sample_size
     stdev = math.sqrt(stdev)
     return stdev
 
