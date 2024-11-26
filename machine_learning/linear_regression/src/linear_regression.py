@@ -57,7 +57,7 @@ def pearsons_correlation_coefficient(independent_var_data: list[float],
     returns:
         Correlation coefficient between 2 variables.
     """
-    
+
     top_sum = 0
     bottom_left_sum = 0
     bottom_right_sum = 0
@@ -71,7 +71,12 @@ def pearsons_correlation_coefficient(independent_var_data: list[float],
     correlation = top_sum / bottom_sum
     return correlation
 
-def simple_linear_regression(independent_var_data: list[float], dependent_var_data: list[float]) -> float:
+        
+
+
+def simple_linear_regression(independent_var_data: list[float], 
+                             dependent_var_data: list[float]
+                             ) -> float:
     """Calculates regression coefficient and constant for linear regression.
 
     Args:
@@ -97,8 +102,8 @@ def main():
     #TODO: data issue - make a way to import clean data easily into program
 
     #example input data with outputs of different functions for temporary testing
-    x_data: list[float] = [1.1, 2.2, 3.2, 4.2, 5.2]
-    y_data: list[float] = [1.1, 2.2, 3.2, 4.2, 5.9]
+    x_data: list[float] = [17, 13, 12, 15, 16, 14, 16, 16, 18, 19]
+    y_data: list[float] = [94, 73, 59, 80, 93, 85, 66, 79, 77, 91]
     x_mean:float = 0
     y_mean:float = 0
     x_stdev:float = 0
@@ -107,16 +112,18 @@ def main():
     x_mean = mean_calculator(x_data)
     y_mean = mean_calculator(y_data)
 
-    print("x mean:", x_mean)
-    print("y mean:", y_mean)
+    print("x mean: ", x_mean)
+    print("y mean: ", y_mean)
     
-    x_stdev = sample_standard_deviation(x_data)
-    y_stdev = sample_standard_deviation(y_data)
+    x_stdev = sample_standard_deviation(x_data, x_mean)
+    y_stdev = sample_standard_deviation(y_data, y_mean)
 
-    print(x_stdev)
-    print(y_stdev)
-    
+    print("x sample standard deviation: ", x_stdev)
+    print("y sample standard deviation: ", y_stdev)
     #simple_linear_regression(xdata, ydata)
+
+    r = pearsons_correlation_coefficient(x_data, y_data, x_mean, y_mean)
+    print("Correlation coefficient: ", r)
 
 if __name__ == '__main__':
     main()
