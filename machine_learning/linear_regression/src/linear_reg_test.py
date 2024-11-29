@@ -1,6 +1,4 @@
 """Simple testing file.
-
-For now I just have test cases that I manually tried which worked.
 """
 
 import linear_regression as lr
