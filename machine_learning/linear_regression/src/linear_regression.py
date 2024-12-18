@@ -1,4 +1,5 @@
 import math
+import numpy as np
 """This program will be used to calculate linear regression from scratch.
 
 I will be implementing the calculations for linear regression using a variety
@@ -71,8 +72,6 @@ def pearsons_correlation_coefficient(independent_var_data: list[float],
     correlation = top_sum / bottom_sum
     return correlation
 
-        
-
 
 def simple_linear_regression(independent_var_data: list[float], 
                              dependent_var_data: list[float]
@@ -87,14 +86,38 @@ def simple_linear_regression(independent_var_data: list[float],
         m: Linear regression coefficient.
         b: Linear regression constant.
     """
-    x_mean = mean_calculator(independent_var_data)
-    y_mean = mean_calculator(dependent_var_data)
-    x_stdev = sample_standard_deviation(independent_var_data)
-    y_stdev = sample_standard_deviation(dependent_var_data)
+    x_mean: float = mean_calculator(independent_var_data)
+    y_mean: float = mean_calculator(dependent_var_data)
+    r = pearsons_correlation_coefficient(independent_var_data, 
+                                         dependent_var_data, 
+                                         x_mean, 
+                                         y_mean
+                                         )
+
+    if (abs(r) < .5):
+        print("Linear regression cannot be used to predict values from this data")
+        return 0, 0
     
-    m: float = 0
-    b: float = 0
+    x_stdev: float = sample_standard_deviation(independent_var_data, x_mean)
+    y_stdev: float = sample_standard_deviation(dependent_var_data, y_mean)
+    
+    m: float = r * (y_stdev / x_stdev)
+    b: float = y_mean - m * x_mean
     return m, b
+
+def ordinary_least_squares(independent_matrix: list[list[float]],
+                           dependent_matrix: list[float]
+                           ) -> list[float]:
+    """Calculates the coefficient matrix for one or more independent variables.
+    
+    Args:
+        independent_matrix: Matrix of independent variables with corresponding data.
+        dependent_matrix: Matrix containing dependent variable data.
+
+    Returns:
+        B: Matrix of linear regression coefficients.
+    """
+    return
 
 
 def main():
@@ -102,8 +125,8 @@ def main():
     #TODO: data issue - make a way to import clean data easily into program
 
     #example input data with outputs of different functions for temporary testing
-    x_data: list[float] = [17, 13, 12, 15, 16, 14, 16, 16, 18, 19]
-    y_data: list[float] = [94, 73, 59, 80, 93, 85, 66, 79, 77, 91]
+    x_data: list[float] = [1, 8, 10, 22]
+    y_data: list[float] = [9, 1, 3, 11]
     x_mean:float = 0
     y_mean:float = 0
     x_stdev:float = 0
@@ -124,6 +147,9 @@ def main():
 
     r = pearsons_correlation_coefficient(x_data, y_data, x_mean, y_mean)
     print("Correlation coefficient: ", r)
+
+    m, b = simple_linear_regression(x_data, y_data)
+    print(f"y = {m}x + {b}")
 
 if __name__ == '__main__':
     main()
