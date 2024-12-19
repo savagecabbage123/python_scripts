@@ -1,5 +1,3 @@
-import math
-import numpy as np
 """This program will be used to calculate linear regression from scratch.
 
 I will be implementing the calculations for linear regression using a variety
@@ -10,6 +8,9 @@ of different methods which include:
 
 More methods may be added above later.
 """
+
+import math
+import numpy as np
 
 def mean_calculator(var_data: list[float]) -> float:
     """Calculates the mean of a set of data.
@@ -110,6 +111,10 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
                            ) -> list[float]:
     """Calculates the coefficient matrix for one or more independent variables.
     
+    Can also be used in quadratic regression, exponential regression, and more.
+    This method minimizes the distance from all data points to the prediction
+    curve.
+
     Args:
         independent_matrix: Matrix of independent variables with corresponding data.
         dependent_matrix: Matrix containing dependent variable data.
@@ -117,7 +122,17 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
     Returns:
         B: Matrix of linear regression coefficients.
     """
-    return
+    transpose = np.transpose(independent_matrix)
+    trxind = np.dot(transpose, independent_matrix)
+
+    #need to check if determinant is not 0 before trying to take inverse
+    if (np.linalg.det(trxind) == 0):
+        return 0
+    
+    inverse = np.linalg.inv(trxind)
+    invxtr = np.dot(inverse, transpose)
+    b = np.dot(invxtr, dependent_matrix)
+    return b
 
 
 def main():
@@ -143,13 +158,16 @@ def main():
 
     print("x sample standard deviation: ", x_stdev)
     print("y sample standard deviation: ", y_stdev)
-    #simple_linear_regression(xdata, ydata)
 
     r = pearsons_correlation_coefficient(x_data, y_data, x_mean, y_mean)
     print("Correlation coefficient: ", r)
 
     m, b = simple_linear_regression(x_data, y_data)
     print(f"y = {m}x + {b}")
+
+    x = np.array([[1, -1], [1, 1], [1, 2]])
+    y = np.array([-2, 0, 3])
+    print(ordinary_least_squares(x, y))
 
 if __name__ == '__main__':
     main()
