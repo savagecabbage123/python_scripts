@@ -104,6 +104,8 @@ r_test = lr.pearsons_correlation_coefficient(x_data, y_data, x_mean_expected, y_
 run_test("r", r_test, r_expected)
 """
 
+#ordinary least squares testing
+
 #test 3 data
 #x0 = [1, 1, 1], x1 = [-1, 1, 2], B0 and B1 relate to x0 and x1 respectively
 #for y = B0 + x1B1
@@ -114,5 +116,17 @@ y = np.array([-2, 0, 3])
 b = [-.71, 1.57]
 
 b_result = lr.ordinary_least_squares(x, y)
-run_test("B0", b[0], b_result[0])
-run_test("B1", b[1], b_result[1])
+run_test("B0 t3", b[0], b_result[0])
+run_test("B1 t3", b[1], b_result[1])
+
+#test 4 data
+x = np.transpose([[1, 1, 1, 1, 1], [3, 4, 5, 6, 2], [8, 5, 7, 3, 1]])
+y = np.array([-3.7, 3.5, 2.5, 11.5, 5.7])
+
+#test 4 expected results
+b = [2.796, 2.28, -1.67]
+
+b_result = lr.ordinary_least_squares(x, y)
+run_test("B0 t4", b[0], b_result[0])
+run_test("B1 t4", b[1], b_result[1])
+run_test("B2 t4", b[2], b_result[2])
