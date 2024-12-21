@@ -36,11 +36,10 @@ def sample_standard_deviation(var_sample_data: list[float], mean: float) -> floa
         The sample standard deviation of a dataset.
     """
     sample_size = len(var_sample_data) - 1
-    stdev = 0
+    stdev: float = 0
     for var_data in var_sample_data:
-        sum = var_data - mean
+        sum: float = var_data - mean
         stdev += sum**2 / sample_size
-    #stdev = stdev / sample_size
     stdev = math.sqrt(stdev)
     return stdev
 
@@ -60,17 +59,17 @@ def pearsons_correlation_coefficient(independent_var_data: list[float],
         Correlation coefficient between 2 variables.
     """
 
-    top_sum = 0
-    bottom_left_sum = 0
-    bottom_right_sum = 0
+    top_sum: float = 0
+    bottom_left_sum: float = 0
+    bottom_right_sum: float = 0
     for i in range(len(independent_var_data)):
-        sum_x = independent_var_data[i] - independent_mean
-        sum_y = dependent_var_data[i] - dependent_mean
+        sum_x: float = independent_var_data[i] - independent_mean
+        sum_y: float = dependent_var_data[i] - dependent_mean
         top_sum += sum_x * sum_y
         bottom_left_sum += sum_x**2
         bottom_right_sum += sum_y**2
     bottom_sum = math.sqrt(bottom_left_sum * bottom_right_sum)
-    correlation = top_sum / bottom_sum
+    correlation: float = top_sum / bottom_sum
     return correlation
 
 
@@ -159,7 +158,7 @@ def main():
     print("x sample standard deviation: ", x_stdev)
     print("y sample standard deviation: ", y_stdev)
 
-    r = pearsons_correlation_coefficient(x_data, y_data, x_mean, y_mean)
+    r: float = pearsons_correlation_coefficient(x_data, y_data, x_mean, y_mean)
     print("Correlation coefficient: ", r)
 
     m, b = simple_linear_regression(x_data, y_data)
