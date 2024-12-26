@@ -119,7 +119,7 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
         dependent_matrix: Matrix containing dependent variable data.
 
     Returns:
-        B: Matrix of linear regression coefficients.
+        b: Matrix of regression coefficients.
     """
     transpose = np.transpose(independent_matrix)
     trxind = np.dot(transpose, independent_matrix)
@@ -133,6 +133,19 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
     b = np.dot(invxtr, dependent_matrix)
     return b
 
+def gradient_descent():
+    """Finds the most optimized regression coefficients.
+
+    Best for very large datasets.
+
+    Args:
+        independent_matrix: Matrix of independent variables with corresponding data.
+        dependent_matrix: Matrix containing dependent variable data.
+    
+    Returns:
+        theta: Matrix of regression coefficients.
+    """
+    return
 
 def main():
     """Main function which runs program."""
