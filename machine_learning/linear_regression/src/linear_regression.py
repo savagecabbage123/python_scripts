@@ -133,7 +133,9 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
     b = np.dot(invxtr, dependent_matrix)
     return b
 
-def gradient_descent():
+def gradient_descent(independent_matrix: list[list[float]],
+                     dependent_matrix: list[float]
+                     ) -> list[float]:
     """Finds the most optimized regression coefficients.
 
     Best for very large datasets.
@@ -145,7 +147,8 @@ def gradient_descent():
     Returns:
         theta: Matrix of regression coefficients.
     """
-    return
+    theta: list[float]
+    return theta
 
 def main():
     """Main function which runs program."""
