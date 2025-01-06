@@ -38,13 +38,13 @@ def sample_standard_deviation(var_sample_data: list[float], mean: float) -> floa
     sample_size = len(var_sample_data) - 1
     stdev: float = 0
     for var_data in var_sample_data:
-        sum: float = var_data - mean
-        stdev += sum**2 / sample_size
+        summed_vals: float = var_data - mean
+        stdev += summed_vals**2 / sample_size
     stdev = math.sqrt(stdev)
     return stdev
 
-def pearsons_correlation_coefficient(independent_var_data: list[float], 
-                                     dependent_var_data: list[float], 
+def pearsons_correlation_coefficient(independent_var_data: list[float],
+                                     dependent_var_data: list[float],
                                      independent_mean, dependent_mean
                                      ) -> float:
     """Calculates the correlation coefficient between 2 variables.
@@ -73,7 +73,7 @@ def pearsons_correlation_coefficient(independent_var_data: list[float],
     return correlation
 
 
-def simple_linear_regression(independent_var_data: list[float], 
+def simple_linear_regression(independent_var_data: list[float],
                              dependent_var_data: list[float]
                              ) -> float:
     """Calculates regression coefficient and constant for linear regression.
@@ -88,19 +88,17 @@ def simple_linear_regression(independent_var_data: list[float],
     """
     x_mean: float = mean_calculator(independent_var_data)
     y_mean: float = mean_calculator(dependent_var_data)
-    r = pearsons_correlation_coefficient(independent_var_data, 
-                                         dependent_var_data, 
-                                         x_mean, 
+    r = pearsons_correlation_coefficient(independent_var_data,
+                                         dependent_var_data,
+                                         x_mean,
                                          y_mean
                                          )
 
-    if (abs(r) < .5):
+    if abs(r) < .5:
         print("Linear regression cannot be used to predict values from this data")
         return 0, 0
-    
     x_stdev: float = sample_standard_deviation(independent_var_data, x_mean)
     y_stdev: float = sample_standard_deviation(dependent_var_data, y_mean)
-    
     m: float = r * (y_stdev / x_stdev)
     b: float = y_mean - m * x_mean
     return m, b
@@ -119,23 +117,24 @@ def ordinary_least_squares(independent_matrix: list[list[float]],
         dependent_matrix: Matrix containing dependent variable data.
 
     Returns:
-        b: Matrix of regression coefficients.
+        b: Matrix of linear regression coefficients.
     """
     transpose = np.transpose(independent_matrix)
     trxind = np.dot(transpose, independent_matrix)
 
     #need to check if determinant is not 0 before trying to take inverse
-    if (np.linalg.det(trxind) == 0):
+    if np.linalg.det(trxind) == 0:
         return 0
-    
     inverse = np.linalg.inv(trxind)
     invxtr = np.dot(inverse, transpose)
     b = np.dot(invxtr, dependent_matrix)
     return b
 
 def gradient_descent(independent_matrix: list[list[float]],
-                     dependent_matrix: list[float]
-                     ) -> list[float]:
+                           dependent_matrix: list[float],
+                           learning_rate: float,
+                           step_count: int
+                           ) -> list[float]:
     """Finds the most optimized regression coefficients.
 
     Best for very large datasets.
@@ -143,11 +142,20 @@ def gradient_descent(independent_matrix: list[list[float]],
     Args:
         independent_matrix: Matrix of independent variables with corresponding data.
         dependent_matrix: Matrix containing dependent variable data.
+        learning_rate: Has control over the size of the step taken towards
+            minimizing the cost function. 
+        step_count: The amount of times we try to get closer to the minimum of
+            the cost function.
     
     Returns:
-        theta: Matrix of regression coefficients.
+        theta: Matrix of linear regression coefficients.
     """
-    theta: list[float]
+    #fill in 0's for the number of variables we are analyzing into theta
+    theta: list[float] = [0 for _ in range(len(independent_matrix[0]))]
+
+    for _ in range(step_count):
+        break
+
     return theta
 
 def main():
@@ -167,7 +175,6 @@ def main():
 
     print("x mean: ", x_mean)
     print("y mean: ", y_mean)
-    
     x_stdev = sample_standard_deviation(x_data, x_mean)
     y_stdev = sample_standard_deviation(y_data, y_mean)
 
