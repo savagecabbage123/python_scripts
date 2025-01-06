@@ -152,9 +152,15 @@ def gradient_descent(independent_matrix: list[list[float]],
     """
     #fill in 0's for the number of variables we are analyzing into theta
     theta: list[float] = [0 for _ in range(len(independent_matrix[0]))]
+    items_per_variable: int = len(independent_matrix)
 
     for _ in range(step_count):
-        break
+        y_estimate: list[float] = np.linalg.matmul(independent_matrix, theta)
+        #derivative of the cost function
+        dtheta = np.linalg.matmul(np.transpose(independent_matrix),
+                        (dependent_matrix - y_estimate)
+                        ) / items_per_variable
+        theta = theta - learning_rate * dtheta
 
     return theta
 
@@ -190,6 +196,16 @@ def main():
     x = np.array([[1, -1], [1, 1], [1, 2]])
     y = np.array([-2, 0, 3])
     print(ordinary_least_squares(x, y))
+
+    x = np.array([[1, 55],
+                  [1, 60],
+                  [1, 65],
+                  [1, 70],
+                  [1, 75],
+                  [1, 80]])
+    y = np.array([316, 292, 268, 246, 227, 207])
+    print("gradient:")
+    print(gradient_descent(x, y, 0.0001, 16))
 
 if __name__ == '__main__':
     main()
